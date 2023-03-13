@@ -29,7 +29,7 @@ alkuvuodesta 2023.
    ```
    - Tämä luo SQLite-tietokannan `db.sqlite3`-tiedostoon
 5. Luo pääkäyttäjä:
-   ```sh
+   
    python manage.py createsuperuser
    ```
    - Käytä käyttäjätunnusta ja salasanaa, jotka muistat helposti.
