@@ -14,6 +14,10 @@ from pathlib import Path
 
 import dj_database_url
 
+if sentry_DSN:
+    import sentry_sdk
+    from sentry_sdk.integrations.django import DjangoIntegration
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -129,7 +133,10 @@ STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
+DROPBOX_APP_KEY = os.environ.get("DROPBOX_APP_KEY =")
+if DROPBOX_APP_KEY:
+    DROPBOX_APP_SECRET = os.environ["DROPBOX_APP_SECRET"]
+    DROPBOX_OAUTH2_TOKEN = os.environ["DROPBOX_OAUTH2_TOKEN"]
+    DROPBOX_OAUTH2_REFRESH_TOKEN = os.environ["DROPBOX_OAUTH2_REFRESH_TOKEN"]
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+    DEFAULT_FILE_STORAGE = "storages.backends.dropbox.DropBoxStorage"
